@@ -1,0 +1,69 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from matplotlib import pyplot as plt
+import warnings
+warnings.filterwarnings('ignore')
+data=pd.read_csv("Churn_Modelling_ass2.csv")
+data.head(10)
+RowNumber	CustomerId	Surname	CreditScore	Geography	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+0	1	15634602	Hargrave	619	France	Female	42	2	0.00	1	1	1	101348.88	1
+1	2	15647311	Hill	608	Spain	Female	41	1	83807.86	1	0	1	112542.58	0
+2	3	15619304	Onio	502	France	Female	42	8	159660.80	3	1	0	113931.57	1
+3	4	15701354	Boni	699	France	Female	39	1	0.00	2	0	0	93826.63	0
+4	5	15737888	Mitchell	850	Spain	Female	43	2	125510.82	1	1	1	79084.10	0
+5	6	15574012	Chu	645	Spain	Male	44	8	113755.78	2	1	0	149756.71	1
+6	7	15592531	Bartlett	822	France	Male	50	7	0.00	2	1	1	10062.80	0
+7	8	15656148	Obinna	376	Germany	Female	29	4	115046.74	4	1	0	119346.88	1
+8	9	15792365	He	501	France	Male	44	4	142051.07	2	0	1	74940.50	0
+9	10	15592389	H?	684	France	Male	27	2	134603.88	1	1	1	71725.73	0
+data.tail(10)
+RowNumber	CustomerId	Surname	CreditScore	Geography	Gender	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+9990	9991	15798964	Nkemakonam	714	Germany	Male	33	3	35016.60	1	1	0	53667.08	0
+9991	9992	15769959	Ajuluchukwu	597	France	Female	53	4	88381.21	1	1	0	69384.71	1
+9992	9993	15657105	Chukwualuka	726	Spain	Male	36	2	0.00	1	1	0	195192.40	0
+9993	9994	15569266	Rahman	644	France	Male	28	7	155060.41	1	1	0	29179.52	0
+9994	9995	15719294	Wood	800	France	Female	29	2	0.00	2	0	0	167773.55	0
+9995	9996	15606229	Obijiaku	771	France	Male	39	5	0.00	2	1	0	96270.64	0
+9996	9997	15569892	Johnstone	516	France	Male	35	10	57369.61	1	1	1	101699.77	0
+9997	9998	15584532	Liu	709	France	Female	36	7	0.00	1	0	1	42085.58	1
+9998	9999	15682355	Sabbatini	772	Germany	Male	42	3	75075.31	2	1	0	92888.52	1
+9999	10000	15628319	Walker	792	France	Female	28	4	130142.79	1	1	0	38190.78	0
+#describe statistics
+data.describe()
+RowNumber	CustomerId	CreditScore	Age	Tenure	Balance	NumOfProducts	HasCrCard	IsActiveMember	EstimatedSalary	Exited
+count	10000.00000	1.000000e+04	10000.000000	10000.000000	10000.000000	10000.000000	10000.000000	10000.00000	10000.000000	10000.000000	10000.000000
+mean	5000.50000	1.569094e+07	650.528800	38.921800	5.012800	76485.889288	1.530200	0.70550	0.515100	100090.239881	0.203700
+std	2886.89568	7.193619e+04	96.653299	10.487806	2.892174	62397.405202	0.581654	0.45584	0.499797	57510.492818	0.402769
+min	1.00000	1.556570e+07	350.000000	18.000000	0.000000	0.000000	1.000000	0.00000	0.000000	11.580000	0.000000
+25%	2500.75000	1.562853e+07	584.000000	32.000000	3.000000	0.000000	1.000000	0.00000	0.000000	51002.110000	0.000000
+50%	5000.50000	1.569074e+07	652.000000	37.000000	5.000000	97198.540000	1.000000	1.00000	1.000000	100193.915000	0.000000
+75%	7500.25000	1.575323e+07	718.000000	44.000000	7.000000	127644.240000	2.000000	1.00000	1.000000	149388.247500	0.000000
+max	10000.00000	1.581569e+07	850.000000	92.000000	10.000000	250898.090000	4.000000	1.00000	1.000000	199992.480000	1.000000
+data.kurt(axis=0,skipna=True)
+RowNumber         -1.200000
+CustomerId        -1.196113
+CreditScore       -0.425726
+Age                1.395347
+Tenure            -1.165225
+Balance           -1.489412
+NumOfProducts      0.582981
+HasCrCard         -1.186973
+IsActiveMember    -1.996747
+EstimatedSalary   -1.181518
+Exited             0.165671
+dtype: float64
+data.kurt(axis=1,skipna=True)
+0       10.998778
+1       10.997909
+2       10.995886
+3       10.998962
+4       10.997675
+          ...    
+9995    10.998908
+9996    10.998551
+9997    10.999788
+9998    10.998530
+9999    10.997973
+Length: 10000, dtype: float64
+sns.distplot(data['Age'])
